@@ -75,7 +75,7 @@ class Biblioteca:
     def _mostrar_resultados_busqueda(self, resultados):
         if resultados:
             print("Resultados de la busqueda")
-            for pun in resultados:  
+            for pub in resultados:  
                 pub.mostar_informacion()
 
         else:
