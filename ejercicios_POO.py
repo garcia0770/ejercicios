@@ -45,6 +45,11 @@ class Usuario:
                 for publicacion in self._prestamos:
                     publicacion.mostrar_informacion()
 
+    def mostrar_prestamos(self):
+        print(f"{self.nombre} ha tomado prestado los siguientes titulos:")
+        for publicacion in self._prestamos:
+            publicacion.mostrar_informacion()
+
 
 #clase biblioteca para gestionar publicacion y usuarios.
 class Biblioteca:
@@ -69,7 +74,7 @@ class Biblioteca:
         self._mostrar_resultados_busqueda(resultados)
 
     def buscar_por_año(self, año):
-        resultados = [pub for pub in self._catalogo if pub.año.lower() == año.lower()]
+        resultados = [pub for pub in self._catalogo if pub.año.lower() == año()]
         self._mostrar_resultados_busqueda(resultados)
 
     def _mostrar_resultados_busqueda(self, resultados):
@@ -80,3 +85,56 @@ class Biblioteca:
 
         else:
             print("no se encontraron resultados:")
+
+#funcion para mostrar informacion de cualquier publicacion.
+
+def mostrar_publicacion(publicacion):
+    publicacion.mostrar_informacion() 
+
+#crear las instancias de libros y revista
+
+libro1 = Libro("El principito", "Antoine de Saint-Exupery", 1943, "ficcion")
+
+revista1 = Revista("National geographic", "varios Autores", 2021, 7)
+
+libro2 = Libro("1984", "george Orwell", 1949, "Dístopia")
+
+revista2 = Revista("Science", "Varios Autores", 2023, 12)
+
+#crear instancia de usuario
+
+usuario1 = Usuario("Juan Pérez")
+usuario2 = Usuario("ana gomez")
+
+#crear instancia de biblioteca
+
+biblioteca = Biblioteca()
+
+#gregar publicaciones al catalogo de la biblioteca
+biblioteca.agregar_publicacion(libro1)
+biblioteca.agregar_publicacion(libro2)
+biblioteca.agregar_publicacion(revista1)
+biblioteca.agregar_publicacion(revista2)
+
+#registrar usuarios en la biblioteca
+biblioteca.registrar_usuario(usuario1)
+biblioteca.registrar_usuario(usuario2)
+
+#mostrar informacion de publicaciones
+mostrar_publicacion(libro1)
+mostrar_publicacion(revista1)
+
+#gestionar prestamos
+usuario1.tomar_prestamos(libro1)
+usuario1.tomar_prestamos(revista2)
+usuario1.mostrar_prestamos()
+usuario1.devolver_publicacion(libro1)
+usuario1.mostrar_prestamos()
+
+#busquedas en el catalogo de la biblioteca
+print("\nBusqueda por titulo")
+biblioteca.buscar_por_titulo("1984")
+print("\nBusqueda por autor")
+biblioteca.buscar_por_autor("Antoine de Saint-exupery")
+print("\nBusqueda por año:")
+biblioteca.buscar_por_año(2021)
