@@ -44,3 +44,39 @@ class Usuario:
                 print (f"{self.nombre} no ha tomado prestado los siguientes titulos:")
                 for publicacion in self._prestamos:
                     publicacion.mostrar_informacion()
+
+
+#clase biblioteca para gestionar publicacion y usuarios.
+class Biblioteca:
+    def __init__(self):
+        self._catalogo = []
+        self._ususarios = []
+
+    def agregar_publicacion(self, publicacion):
+        self._catalogo.append(publicacion)
+        print(f"Se ha agredado '{publicacion._titulo}' al catalogo.")
+    
+    def registrar_usuario(self, usuario):
+        self._ususarios.append(usuario)
+        print(f"Usuario: '{usuario.nombre}' ha sido registrado")
+
+    def buscar_por_titulo(self, titulo):
+        resultados = [pub for pub in self._catalogo if pub.titulo.lower() == titulo.lower()]
+        self._mostrar_resultados_busqueda(resultados)
+
+    def buscar_por_autor(self, autor):
+        resultados = [pub for pub in self._catalogo if pub.autor.lower() == autor.lower()]
+        self._mostrar_resultados_busqueda(resultados)
+
+    def buscar_por_año(self, año):
+        resultados = [pub for pub in self._catalogo if pub.año.lower() == año.lower()]
+        self._mostrar_resultados_busqueda(resultados)
+
+    def _mostrar_resultados_busqueda(self, resultados):
+        if resultados:
+            print("Resultados de la busqueda")
+            for pun in resultados:  
+                pub.mostar_informacion()
+
+        else:
+            print("no se encontraron resultados:")
